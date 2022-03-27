@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dog or Cat </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}" type="image/x-icon">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='js/jquery-1.7.1.min.js') }}"></script>
+</head>
+<body>
+<script>
+    function showloading() {
+        image = document.getElementById('loading_image');
+        image.style.display = 'inline'
+    }
+</script>
+
+
+  <h4 style="margin: auto;width: 80%; text-align: center; margin-top: 20px;  text-transform: uppercase">AUDIO CLASSIFICATION </h4>
+<div style="text-align: center; margin-top: 20px">
+  <img style="max-width: 600px" src="{{ url_for('static', filename='img/egg_class.jpg') }}"/>
+</div>
+  <hr class="top_line">
+
+<div style="width: 90%; margin: auto; text-align: center">
+    <audio controls="controls" autoplay="autoplay" src="{{ url_for('record_file', filename=audio_file_name)}}"></audio>
+    
+    <p style="font-style: italic">{{ audio_file_name }}
+    </p>
+
+
+    <h3><b>Dengan Tingkat Akurasi :<span style="color: green;">{{ accuracy }} </span> Telur Dikategorikan Menjadi  <span style="color: red;">{{ label }}</span></b></h3>
+     <a href="/"class="text-left btn btn-default btn-file btn-primary">HOME</a> 
+
+    <div style="text-align: center">
+        <img id="loading_image" style="display: none" src="{{ url_for('static', filename='img/loading_.gif')}}">
+    </div>
+</div>
+</body>
+
+</html>

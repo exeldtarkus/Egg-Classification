@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Record Egg</title>
+    <!-- Latest compiled and minified CSS -->
+
+    <!--Image Source-->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}" type="image/x-icon">
+  
+
+
+    <!--Offline Source CSS and JS-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+
+    
+</head>
+
+<script type="text/javascript">
+  var count;
+  var counter;
+  var counter2;
+
+  function resetEverything()
+  {
+      $("#counter, #counter2").hide();
+      $('#myButton02').show();
+      clearInterval(counter);  
+  }
+
+  $(document).ready(function(){
+      resetEverything();
+      $('#myButton02').click(function(){
+          $('#myButton02').show();
+          $('#counter').show();
+          $('#counter2').show();
+          count=6;
+          counter=setInterval(timer, 1000);
+          function timer(){
+            count=count-1;
+            if (count <= 0){
+              clearInterval(counter);
+
+              return;  }
+          document.getElementById("secs").innerHTML=count + " detik.";}
+      });
+  });
+</script>
+
+
+<script>
+    function showloading() {
+        image = document.getElementById('loading_image');
+        image.style.display = 'inline'
+    }
+</script>
+
+<style>
+    .img_holder img{
+        max-width: 100%; max-height: 100%;
+    }
+    .btn-file {
+    position: relative;
+    overflow: hidden;
+    }
+    .btn-file input[type=file] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        min-width: 100%;
+        min-height: 100%;
+        font-size: 100px;
+        text-align: right;
+        filter: alpha(opacity=0);
+        opacity: 0;
+        outline: none;
+        background: white;
+        cursor: inherit;
+        display: block;
+    }
+</style>
+
+<script>
+  function refreshPage(){
+      window.location.reload();
+  } 
+</script>
+<script>
+  function getInputValue(){
+    // Selecting the input element and get its value 
+    var inputVal = document.getElementById("audio_name").value;
+    document.getElementById("demo").innerHTML = inputVal; 
+            
+    // Displaying the value
+    // alert(inputVal);
+  }
+</script>
+
+
+<body>
+  <div class="container" style="margin: auto;width;40%; text-align: center; margin-top: 70px; ">
+  <h3 style="margin: auto;width: 80%; text-align: center; margin-top: 50px; ">Egg Classification</h3>
+
+  <div style="text-align: center; margin-top: 20px">
+    <img style="max-width: 600px" src="{{ url_for('static', filename='img/egg_class.jpg') }}"/>
+  </div>
+
+  <hr class="top_line">
+
+  <form action="/raspberrypi" method="post" enctype="multipart/form-data" style="margin-top: 50px; width: 60%; text-align: center; margin: auto;" onsubmit="showloading()">
+
+    <input type="submit" class="text-left btn btn-default btn btn-file" name="buttonAr" id=buttonAr value="START-ENGINE"></input>
+    <input type="submit" class="text-left btn btn-default btn btn-file" name="buttonAr" id=buttonAr value="STOP"></input>
+<!--    <button action="/arduino" type="submit" class="text-left btn btn-default">
+      <input type="hidden" name="buttonAr" id=buttonAr value="1"></input> START-ENGINE
+    </button>
+
+    <button action="/arduino" type="submit" class="text-left btn btn-default">
+      <input type="hidden" name="buttonAr" id=buttonAr value="3"></input> STOP
+    </button>
+-->
+  <br>
+  </form>
+
+<br>
+  <form action="/recordpredict" method="post" enctype="multipart/form-data">
+
+    <div id="counter">Recording File |  <span id="secs" /></div>
+
+    <button class="text-left btn btn-default btn-file btn-primary" name="Predict" id="myButton02" value="Predict"> Predict </button>
+  </form>
+  <hr class="top_line">
+  <a href="/"class="text-left btn btn-default btn-file btn-default">Home</a>   
+
+
+
+
+  <br>
+
+  <div style="text-align: center">
+    <img id="loading_image" style="display: none" src="{{ url_for('static', filename='img/loading_.gif')}}">
+  </div>
+
+<!--
+  <form action="/recordwav" method="post" enctype="multipart/form-data" style="margin-top: 50px; width: 60%; text-align: center; margin: auto;">
+    <span class="text-left btn btn-default btn-file btn-default">Nama File Wav 
+        <input type="text" name="audio_name" id=audio_name required>
+    </span>
+
+    <span class="text-right">
+      <button class="mic_btn" id="myButton02"><img src="{{ url_for('static', filename = 'img/microphone_idle.png') }}" width=33 height=33 ></button>
+
+
+    </span>
+
+    <div id="counter">Recording File |  <span id="secs" /></div>
+
+
+         
+  </form>
+-->
+  
+</div>
+
+</body>
+</html>
+
